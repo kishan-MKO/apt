@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "628003761262",
+    "project_id": "firestoretrial-842be",
+    "storage_bucket": "firestoretrial-842be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628003761262:android:477b90ba1cb8aba8500a7f",
+        "android_client_info": {
+          "package_name": "com.example.finalPart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628003761262-sq4ur8dhkrs4b731estng8f4lp3abahf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdMgioIcxbpNdJyaEuLpZhl48Z_Q34saw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628003761262-sq4ur8dhkrs4b731estng8f4lp3abahf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628003761262:android:b37c5222fd58c5c3500a7f",
+        "android_client_info": {
+          "package_name": "com.example.march_1_firebase_messaging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628003761262-sq4ur8dhkrs4b731estng8f4lp3abahf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdMgioIcxbpNdJyaEuLpZhl48Z_Q34saw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628003761262-sq4ur8dhkrs4b731estng8f4lp3abahf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628003761262:android:43d5dfb404e25dd6500a7f",
+        "android_client_info": {
+          "package_name": "com.julow.journal_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628003761262-sq4ur8dhkrs4b731estng8f4lp3abahf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdMgioIcxbpNdJyaEuLpZhl48Z_Q34saw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628003761262-sq4ur8dhkrs4b731estng8f4lp3abahf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
