@@ -18,10 +18,13 @@ class _EntryScreenState extends State<EntryScreen> {
   FlutterLocalNotificationsPlugin localNotification;
   String valueChoose;
   String _date;
-  String _dropdownError;
+  String _dropdownErrorDate;
+  String _dropdownErrorTime;
+  String _dropdownErrorApt;
+  String _tempTime;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _isValid= _formKey.currentState.validate();
-  GlobalKey<ScaffoldState> _scaffoldKey;
+
   List AppointmentType = [
     "Dentist",
     "Clinical",
@@ -35,16 +38,26 @@ class _EntryScreenState extends State<EntryScreen> {
   //     title: Text(error),
   //   );
   // }
-  _validateForm() {
+  _validateForm(EntryProvider entryProvider) {
     bool _isValid = _formKey.currentState.validate();
 
     if (valueChoose == null) {
-      setState(() => _dropdownError = "Please select an option!");
+      setState(() => _dropdownErrorApt = "Please select an option!");
+      _isValid = false;
+    }
+    if (_date == null) {
+      setState(() => _dropdownErrorDate = "Choose a date !");
+      _isValid = false;
+    }
+    if (_tempTime == null) {
+      setState(() => _dropdownErrorTime = "select a time !");
       _isValid = false;
     }
 
     if (_isValid) {
-      sdsd
+      entryProvider.saveEntry();
+      scheduleNotification(entryProvider);
+      Navigator.of(context).pop();
     }
   }
 
@@ -80,14 +93,12 @@ class _EntryScreenState extends State<EntryScreen> {
         entryProvider.date[9]);
     int month = int.parse(entryProvider.date[0] + entryProvider.date[1]);
     int day = int.parse(entryProvider.date[3] + entryProvider.date[4]);
-    print('month $month');
-    print('day $day');
-    print('year $year');
+
     if (DateTime.now().day < day) {
       scheduleNotificationDateTime =
           DateTime(year, month, day - 1).add(Duration(seconds: 2));
     } else {
-      scheduleNotificationDateTime = DateTime.now().add(Duration(seconds: 5));
+      scheduleNotificationDateTime = DateTime.now().add(Duration(seconds: 2));
     }
 
     var androidChannelSpecifics = AndroidNotificationDetails(
@@ -157,7 +168,9 @@ class _EntryScreenState extends State<EntryScreen> {
     );
     if (picked != null && picked != _time) {
       setState(() {
+        _tempTime = "ok";
         _time = picked;
+        _dropdownErrorTime = null;
         entryProvider.changeTime =
             "${convertTime(picked.hour.toString())}:${convertTime(picked.minute.toString())}";
         _clicked = true;
@@ -175,9 +188,10 @@ class _EntryScreenState extends State<EntryScreen> {
         firstDate: DateTime(2020),
         lastDate: DateTime(2050));
 
-    if (picked != null)
-      _date =
-          "${convertDay(picked.month.toString())}-${convertMonth(picked.day.toString())}-${picked.year.toString()}";
+    if (picked != null) 
+    _dropdownErrorDate = null;
+    _date =
+        "${convertDay(picked.month.toString())}-${convertMonth(picked.day.toString())}-${picked.year.toString()}";
     entryProvider.changeDate =
         "${convertDay(picked.month.toString())}-${convertMonth(picked.day.toString())}-${picked.year.toString()}";
 
@@ -230,6 +244,12 @@ class _EntryScreenState extends State<EntryScreen> {
                       },
                     ),
                   ),
+                  _dropdownErrorDate == null
+                      ? SizedBox.shrink()
+                      : Text(
+                          _dropdownErrorDate ?? "",
+                          style: TextStyle(color: Colors.red),
+                        ),
 
                   // IconButton(
                   //   icon: Icon(Icons.calendar_today),
@@ -263,6 +283,12 @@ class _EntryScreenState extends State<EntryScreen> {
                       ),
                     ),
                   ),
+                  _dropdownErrorTime == null
+                      ? SizedBox.shrink()
+                      : Text(
+                          _dropdownErrorTime ?? "",
+                          style: TextStyle(color: Colors.red),
+                        ),
                   Container(
                     child: DropdownButton(
                       hint: Text('Select the appointment Type: '),
@@ -274,7 +300,7 @@ class _EntryScreenState extends State<EntryScreen> {
                         setState(() {
                           valueChoose = newValue;
                           entryProvider.changeAptType = newValue;
-                          _dropdownError = null;
+                          _dropdownErrorApt = null;
                         });
                       },
                       items: AppointmentType.map(
@@ -287,15 +313,15 @@ class _EntryScreenState extends State<EntryScreen> {
                       ).toList(),
                     ),
                   ),
-                  _dropdownError == null
+                  _dropdownErrorApt == null
                       ? SizedBox.shrink()
                       : Text(
-                          _dropdownError ?? "",
+                          _dropdownErrorApt ?? "",
                           style: TextStyle(color: Colors.red),
                         ),
                   // ignore: deprecated_member_use
                   RaisedButton(
-                    onPressed: () => _validateForm(),
+                    onPressed: () => _validateForm(entryProvider),
                     child: Text("Submit"),
                   ),
                 ],
